@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np 
 from sklearn  import tree
 from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
 
 filmes = pd.read_csv("datasets/movies_multilinear_reg.csv")
 
@@ -32,9 +33,18 @@ model.predict([zootopia])
 
 #modelo 2
 modelo = tree.DecisionTreeClassifier(max_depth=5)
+lab_enc = preprocessing.LabelEncoder()
+treino_marcacoes = lab_enc.fit_transform(treino_marcacoes).ravel()
 modelo.fit(treino,treino_marcacoes)
+
+teste_marcacoes = lab_enc.fit_transform(teste_marcacoes)
 
 modelo.score(treino,treino_marcacoes)
 modelo.score(teste,teste_marcacoes)
 
 modelo.predict([zootopia])
+
+
+
+
+
